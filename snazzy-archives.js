@@ -18,8 +18,7 @@ if (snazzy_fx==1)
         visible:4,	// number of visible elements
         circular:false, //is it circular
         def_width:116,	// width + padding width
-        def_height:0,
-
+        def_height:0
     });
     
 	$('.sz_month').css('width','100px');

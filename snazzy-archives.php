@@ -6,7 +6,7 @@
 
 /*
 Plugin Name: Snazzy Archives
-Version: 0.4
+Version: 0.5
 Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
 Author: Vladimir Prelovac
 Author URI: http://www.prelovac.com/vladimir
@@ -247,12 +247,17 @@ function createflashcode($tagcloud){
 			if ($options['pages'])
 				array_push($types, "'page'");
 				
+			if (is_category() || is_tag() || is_day() || is_month() || is_year()) {
+				global $posts;
+			} else {
+
+				
 			$types=implode(',', $types);
 				
 			$query="SELECT * FROM $wpdb->posts WHERE post_status = 'publish' AND post_password = '' AND post_type IN ($types) ORDER BY post_date_gmt DESC ";
 			
 			$posts = $wpdb->get_results($query);
-			
+			}			
 			
 			
 			if ($options['layout'])
@@ -303,7 +308,7 @@ function createflashcode($tagcloud){
 			if ($fx=='1')
 			{	
 					$result.='
-					<button id="szleft">&lt;</button> <button id="szright">&gt;</button>
+					<p><button id="szleft">&lt;</button> <button id="szright">&gt;</button></p>
 					<div class="snazzy">
 						<div class="sz_carousel">
 							<ul>';
@@ -464,7 +469,7 @@ height:850px;
 						$curday='';
 						
 						if ($curmonth)
-							$result.="</div></'.($fx?'li':'td').'>";							
+							$result.='</div></'.($fx?'li':'td').'>';							
 						
 						$result.= '<'.($fx?'li':'td valign="top"').'><div class="sz_date_mon">'.$month.'</div><div class="sz_month">';
 						$curmonth=$month;
@@ -496,7 +501,16 @@ height:850px;
 					
 				
 				if ($fx=='1')
+				{
+						if ($curday)
+							$result.="</div>";	
+						
+						$curday='';	
+						if ($curmonth)
+							$result.='</div></'.($fx?'li':'td').'>';
+						
 					$result.="</ul></div></div>";
+				}
 				else if ($fx=='2')
 					$result.="</div></div></div></div>";
 				else if ($fx=='3'){
@@ -504,8 +518,16 @@ height:850px;
 										
 				}
 				else
+				{
+					if ($curday)
+							$result.="</div>";	
+						
+						$curday='';	
+						if ($curmonth)
+							$result.='</div></'.($fx?'li':'td').'>';
+							
 					$result.="</tr></tbody></table></div>";
-				
+				}			
 			  $result.='<div style="margin-left:12px">created by <a href="http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives">Snazzy Archives</a></div>';
 					
 			

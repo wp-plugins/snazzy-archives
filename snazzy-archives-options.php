@@ -7,7 +7,8 @@
 		 <h3>Information</h3>
 		 <div id="dbx-content" style="text-decoration:none;">
 			 <img src="<?php echo $imgpath ?>/home.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives"> Snazzy Archives Home</a><br /><br />
-			 <img src="<?php echo $imgpath ?>/help.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives#comments"> Suggest a Feature</a><br /><br />
+			 <img src="<?php echo $imgpath ?>/help.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/forum"> Plugin Forums</a><br /><br />
+			 <img src="<?php echo $imgpath ?>/rate.png"><a style="text-decoration:none;" href="http://wordpress.org/extend/plugins/snazzy-archives/"> Rate this plugin</a><br /><br />			 
 			 <img src="<?php echo $imgpath ?>/more.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/wordpress-plugins"> My WordPress Plugins</a><br /><br />
 			 <br />
 		
