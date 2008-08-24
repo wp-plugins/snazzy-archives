@@ -28,6 +28,8 @@ Main features of Snazzy Archives are:
 
 
 Change log
+v0.5.1 - No scripts added to admin panel anymore
+
 v0.5 - IE fix and xHTML compliance
 
 v0.4 - bug fix release

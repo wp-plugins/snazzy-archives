@@ -6,7 +6,7 @@
 
 /*
 Plugin Name: Snazzy Archives
-Version: 0.5
+Version: 0.5.1
 Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
 Author: Vladimir Prelovac
 Author URI: http://www.prelovac.com/vladimir
@@ -68,7 +68,8 @@ function ScriptsAction()
 {	
 		global $post;
 		
-			
+			if (!is_admin())
+			{
 			$options = $this->get_options();	
 			
 			$mini=$options['mini'] ? 1 : 0;
@@ -108,7 +109,7 @@ END;
 				
 			
 			echo '<link rel="stylesheet" href="'.$this->plugin_url.'/snazzy-archives.css" type="text/css" />'; 
-	
+		}
 	
 }
 	
