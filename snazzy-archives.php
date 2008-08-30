@@ -6,7 +6,7 @@
 
 /*
 Plugin Name: Snazzy Archives
-Version: 0.5.1
+Version: 0.5.2
 Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
 Author: Vladimir Prelovac
 Author URI: http://www.prelovac.com/vladimir
@@ -255,7 +255,7 @@ function createflashcode($tagcloud){
 				
 			$types=implode(',', $types);
 				
-			$query="SELECT * FROM $wpdb->posts WHERE post_status = 'publish' AND post_password = '' AND post_type IN ($types) ORDER BY post_date_gmt DESC ";
+			$query="SELECT * FROM $wpdb->posts WHERE post_status = 'publish' AND post_password = '' AND post_type IN ($types) ORDER BY post_date DESC ";
 			
 			$posts = $wpdb->get_results($query);
 			}			
