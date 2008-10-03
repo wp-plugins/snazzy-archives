@@ -95,8 +95,11 @@ padding-top: 20px;
  left: -5000px;
 }
 
+.sz_carousel ul {
+ text-indent:0 !important;
+}
+
 .sz_carousel li {
  padding:0px 8px;
-
 }
 

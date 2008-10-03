@@ -58,16 +58,22 @@
 					<h3>Display</h3>			
 					<p>These are tweaks to the way Snazzy archives look.</p>
 					<input type="checkbox" name="mini"  <?php echo $mini ?> /><label for="mini"> Start in mini mode (collapsed archives)</label>  <br />
-					<br><img src="<?php echo $layout ?>/example3.jpg"> 
+					<br><img src="<?php echo $imgpath ?>/example3.jpg"> 
 					<p>Mini mode can gain you a lot of space, and the user can expand/shrink archives by clicking on the date headings. This works in full mode too!</p>
 					
-					<input type="checkbox" name="corners"  <?php echo $corners ?> /><label for="corners"> Round corners of images</label>  <br /><br/>	
-					<p>This will apply dynamic rounding of image corners for better looking images.</p>
+					<input type="checkbox" name="fold"  <?php echo $fold ?> /><label for="fold"> Display Years in rows</label>  <br />	
+					<p>When enabled a new archive year will display below the previous, instead in one big row.</p><br/>
+					
+					<input type="checkbox" name="reverse_months"  <?php echo $reverse_months ?> /><label for="reverse_months"> Reverse months</label>  <br />
+					<p>If enabled, archive months will be displayed in descending order (December through January).</p> <br />
+					
+					<input type="checkbox" name="corners"  <?php echo $corners ?> /><label for="corners"> Round corners of images</label>  <br />
+					<p>This will apply dynamic rounding of image corners for better looking images.</p><br/>	
 					
 					
 					<h3>Year book</h3>	
 					<p>You can specify unique text to print with any year, describing it.</p>
-					<img src="<?php echo $layout ?>/example4.jpg"> <p>Year book shows below the year and is useful for sharing your thoughts.</p>
+					<img src="<?php echo $imgpath ?>/example4.jpg"> <p>Year book shows below the year and is useful for sharing your thoughts.</p>
 					<p>Use description in the form year#description, one per line, HTML allowed. For example: <br><br>
 					2007#This was a good year! I traveled a lot and met new people.<br>
 					2008#Learned a lot about WordPress and I am loving it.<br>

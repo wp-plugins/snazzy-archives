@@ -124,7 +124,7 @@ END;
 			'posts' => 'on',
 			'pages' => '',
 			'fold' => 'on',
-			'reverse_months' => ''		
+			'reverse_months' => 'on'		
 		);
 
     $saved = get_option($this->SnazzyArchives_DB_option);
@@ -182,8 +182,8 @@ END;
 		$mini=$options['mini']=='on'?'checked':'';
 		$posts=$options['posts']=='on'?'checked':'';
 		$pages=$options['pages']=='on'?'checked':'';
-		$fold=$options['fold']=='on'?'checked':'';
-		$reverse_months=$options['reverse_months']=='on'?'checked':'';
+		$pages=$options['fold']=='on'?'checked':'';
+		$pages=$options['reverse_months']=='on'?'checked':'';
 
 		
 		
@@ -261,14 +261,7 @@ function createflashcode($tagcloud){
 				
 			$types=implode(',', $types);
 				
-			if ($options['reverse_months'])
-				$oby='YEAR(post_date) DESC, post_date ';
-			else 
-				$oby='ORDER BY post_date DESC ';
-			$query="SELECT * FROM $wpdb->posts WHERE post_status = 'publish' AND post_password = '' AND post_type IN ($types) ORDER BY ".$oby;
-			
-			
-
+			$query="SELECT * FROM $wpdb->posts WHERE post_status = 'publish' AND post_password = '' AND post_type IN ($types) ORDER BY post_date DESC ";
 			
 			$posts = $wpdb->get_results($query);
 			}			
@@ -467,11 +460,7 @@ height:850px;
 							$result.='</div></'.($fx?'li':'td').'>';
 						
 						$curmonth='';
-						if ($options['fold'])						
-							$result.= '</tr><tr><'.($fx?'li':'td valign="top"').'><div class="sz_date_yr">'.$year.'</div><div class="sz_cont">';
-						else
-							$result.= '<'.($fx?'li':'td valign="top"').'><div class="sz_date_yr">'.$year.'</div><div class="sz_cont">';
-
+						$result.= '<'.($fx?'li':'td valign="top"').'><div class="sz_date_yr">'.$year.'</div><div class="sz_cont">';
 						
 						if ($yrs[$year])
 							$result.='<div class="sz_year">&#8220;'.$yrs[$year].'&#8221;</div>';
