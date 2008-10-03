@@ -6,7 +6,7 @@
 
 /*
 Plugin Name: Snazzy Archives
-Version: 0.6
+Version: 0.6.1
 Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
 Author: Vladimir Prelovac
 Author URI: http://www.prelovac.com/vladimir
@@ -264,7 +264,7 @@ function createflashcode($tagcloud){
 			if ($options['reverse_months'])
 				$oby='YEAR(post_date) DESC, post_date ';
 			else 
-				$oby='ORDER BY post_date DESC ';
+				$oby='post_date DESC ';
 			$query="SELECT * FROM $wpdb->posts WHERE post_status = 'publish' AND post_password = '' AND post_type IN ($types) ORDER BY ".$oby;
 			
 			
@@ -323,6 +323,7 @@ function createflashcode($tagcloud){
 			{	
 					$result.='
 					<p><button id="szleft">&lt;</button> <button id="szright">&gt;</button></p>
+					<div style="clear:both;"></div>
 					<div class="snazzy">
 						<div class="sz_carousel">
 							<ul>';
@@ -468,7 +469,7 @@ height:850px;
 						
 						$curmonth='';
 						if ($options['fold'])						
-							$result.= '</tr><tr><'.($fx?'li':'td valign="top"').'><div class="sz_date_yr">'.$year.'</div><div class="sz_cont">';
+							$result.= ($fx?'':'</tr><tr>').'<'.($fx?'li':'td valign="top"').'><div class="sz_date_yr">'.$year.'</div><div class="sz_cont">';
 						else
 							$result.= '<'.($fx?'li':'td valign="top"').'><div class="sz_date_yr">'.$year.'</div><div class="sz_cont">';
 
