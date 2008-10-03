@@ -30,7 +30,8 @@ Main features of Snazzy Archives are:
 Change log
 v0.6 
 - Added option to show years in rows (on by default)
-- ADded option to show months in reverse order (off by default)
+- Added option to show months in reverse order (off by default). 
+Thanks to Jorge Sierra for suggesting these.
 
 v0.5.2 - Fixed issues with rogue posts appearign at the end of Archive
 v0.5.1 - No scripts added to admin panel anymore
