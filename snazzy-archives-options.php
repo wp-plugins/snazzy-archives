@@ -34,6 +34,15 @@
 					<input type="checkbox" name="posts"  <?php echo $posts ?>/><label for="posts"> Show Posts</label>  <br />
 					<input type="checkbox" name="pages"  <?php echo $pages ?>/><label for="pages"> Show Pages</label>  <br />
 					<br />
+					<p>
+					<?php if ($writeable) : ?>
+					Your wp-content folder is writeable by WordPress. You may use the cache.<br /><br />
+					<input type="checkbox" name="cache"  <?php echo $cache ?>/><label for="cache"> Use Snazzy Cache</label>  <br />
+					<?php else : ?>
+					Your wp-content folder is not writeable by WordPress. Caching is not possible.
+					<?php endif; ?>
+					</p>
+					<br />
 					
 					<h3>Layout</h3>
 					<p>Snazzy Archives currently supports two layouts, and you can buid your own.</p>
@@ -46,13 +55,13 @@
 					<h3>Effects</h3>
 					<p>Special effects modify the way your archives look. You can either select one of them or use the archives without special effects (this is default, same as setting special fx to 0).</p>
 					<input type="text" name="fx" size="15" value="<?php echo $fx ?>"/><label for="width"> Special FX</label><br/>	
-					<p>Currently available effects:<br><ol>
-						<li><a href="http://www.prelovac.com/vladimir/archive-spec?fx=1">Carousel</a></li>
+					<p>Currently available effects:<br><ul>
+						<li>1. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=1">Carousel</a> - Shows the Snazzy Archive using JavaScript carousel (saving space).</li>
 						<?php if (0) : ?>
-						<li><a href="http://www.prelovac.com/vladimir/archive-spec?fx=2">jQuery space</a></li>
-						<li><a href="http://www.prelovac.com/vladimir/archive-spec?fx=3">Flash space</a></li>
+						<li>2. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=2">jQuery space</a></li>
+						<li>3. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=3">Flash space</a></li>
 						<?php  endif; ?>
-					</ol></p>
+					</ul></p>
 					<br /><br />
 					
 					<h3>Display</h3>			
@@ -67,9 +76,13 @@
 					<input type="checkbox" name="reverse_months"  <?php echo $reverse_months ?> /><label for="reverse_months"> Reverse months</label>  <br />
 					<p>If enabled, archive months will be displayed in descending order (December through January).</p> <br />
 					
+					<input type="checkbox" name="showimages"  <?php echo $showimages ?> /><label for="showimages"> Show Images</label>  <br />
+					<p>Show post images. You can disable this to preserve bandwidth.</p><br/>					
+					
 					<input type="checkbox" name="corners"  <?php echo $corners ?> /><label for="corners"> Round corners of images</label>  <br />
 					<p>This will apply dynamic rounding of image corners for better looking images.</p><br/>	
 					
+
 					
 					<h3>Year book</h3>	
 					<p>You can specify unique text to print with any year, describing it.</p>
@@ -80,6 +93,11 @@
 					</p>
 					
 					<textarea name="years"  rows="10" cols="80"><?php echo $years ?></textarea>				<br/>	<br/>	
+					
+					<h3>Advanced</h3>	
+					<p>You may enter Snazzy Archives Page ID. If you do, Snazzy Archives will load JavaScript files only on this page.</p>
+					<input type="text" name="pageid" size="15" value="<?php echo $pageid ?>"/><label for="pageid"> Enter Snazzy Archives Page ID</label><br/>
+					<br/>	<br/>	
 					
 					<div class="submit"><input type="submit" name="Submit" value="Update" /></div>
 			</form>

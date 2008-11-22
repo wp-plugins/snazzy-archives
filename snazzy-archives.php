@@ -6,11 +6,11 @@
 
 /*
 Plugin Name: Snazzy Archives
-Version: 0.6.1
+Version: 1.0
 Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
 Author: Vladimir Prelovac
 Author URI: http://www.prelovac.com/vladimir
-Description: Express yourself and your blog through a unique representation of your posts.
+Description: Express your site through unique representation of archive page.
 
 
 */
@@ -47,6 +47,7 @@ class SnazzyArchives {
 	function SnazzyArchives() {	
 		
 		$this->plugin_url=trailingslashit( get_bloginfo('wpurl') ).PLUGINDIR.'/'. dirname( plugin_basename(__FILE__) );
+		$this->cache_path= ABSPATH .'wp-content/';
 		
 		// add shortcode handler
 		add_shortcode('snazzy-archive', array(&$this, 'display'));	
@@ -54,6 +55,9 @@ class SnazzyArchives {
 		// Add Options Page
 		add_action('admin_menu',  array(&$this, 'admin_menu'));
 		add_action('wp_print_scripts',  array(&$this, 'ScriptsAction'));
+		
+		add_action( 'edit_post',  array(&$this,'delete_cache'));
+		add_action( 'save_post',  array(&$this,'delete_cache')); 
 	}
 
 	// Hook the options mage
@@ -70,7 +74,13 @@ function ScriptsAction()
 		
 			if (!is_admin())
 			{
-			$options = $this->get_options();	
+			$options = $this->get_options();
+			
+			$pageid=$options['pageid'];
+			
+			// do not load scripts on this page
+			if ($pageid && !is_page($pageid))
+				return;	
 			
 			$mini=$options['mini'] ? 1 : 0;
 			$fx=$options['fx'];
@@ -112,6 +122,10 @@ END;
 		}
 	
 }
+	function delete_cache()
+	{
+		@unlink($this->cache_path."snazzy_cache.htm");
+	}
 	
 	// Handle our options
 	function get_options() {
@@ -123,8 +137,11 @@ END;
 			'corners' => '',
 			'posts' => 'on',
 			'pages' => '',
-			'fold' => 'on',
-			'reverse_months' => ''		
+			'fold' => 'on',			
+			'reverse_months' => '',
+			'showimages' => 'on',		
+			'cache' => '',	
+			'pageid' => 0	
 		);
 
     $saved = get_option($this->SnazzyArchives_DB_option);
@@ -158,13 +175,18 @@ END;
 			$options['years']=htmlspecialchars($_POST['years']);		
 			$options['layout']=(int) $_POST['layout'];		
 			$options['mini']= $_POST['mini'];		
-			$options['corners']= $_POST['corners'];		
+			$options['corners']= $_POST['corners'];	
+			$options['showimages']= $_POST['showimages'];		
 			$options['posts']= $_POST['posts'];		
 			$options['pages']= $_POST['pages'];		
 			$options['fold']= $_POST['fold'];		
 			$options['reverse_months']= $_POST['reverse_months'];		
+			$options['cache']= $_POST['cache'];	
+			$options['pageid']=(int) $_POST['pageid'];	
 				
 			update_option($this->SnazzyArchives_DB_option, $options);
+			
+			$this->delete_cache();
 			
 			echo '<div class="updated fade"><p>Plugin settings saved.</p></div>';
 		}
@@ -175,17 +197,20 @@ END;
 		$action_url = $_SERVER['REQUEST_URI'];	
 
 		$fx=$options['fx'];
+		$pageid=$options['pageid'];
 		
 		$layout=$options['layout'];
 		$years=$options['years'];
 		$corners=$options['corners']=='on'?'checked':'';
+		$showimages=$options['showimages']=='on'?'checked':'';
 		$mini=$options['mini']=='on'?'checked':'';
 		$posts=$options['posts']=='on'?'checked':'';
 		$pages=$options['pages']=='on'?'checked':'';
 		$fold=$options['fold']=='on'?'checked':'';
 		$reverse_months=$options['reverse_months']=='on'?'checked':'';
+		$cache=$options['cache']=='on'?'checked':'';
 
-		
+		$writeable=is_writeable($this->cache_path);
 		
 		$imgpath=$this->plugin_url.'/i';	
 		
@@ -253,6 +278,20 @@ function createflashcode($tagcloud){
 				array_push($types, "'post'");
 			if ($options['pages'])
 				array_push($types, "'page'");
+				
+			$cache=$options['cache'];
+			$showimages=$options['showimages'];
+				
+				
+				if ($cache) {
+					// cache part
+					$data = @file_get_contents($this->cache_path."snazzy_cache.htm");
+					
+					// return the cache data if it exists
+					if ($data)
+						return $data;
+					}
+		
 				
 			if (is_category() || is_tag() || is_day() || is_month() || is_year()) {
 				global $posts;
@@ -393,24 +432,22 @@ height:850px;
 					
 					$imageurl="";
 					
-
-					preg_match('/<\s*img [^\>]*src\s*=\s*[\""\']?([^\""\'>]*)/i' ,  $post->post_content, $matches);
-					$imageurl=$matches[1];
-					
-					if (!$imageurl)
+					if ($showimages)
 					{
+						preg_match('/<\s*img [^\>]*src\s*=\s*[\""\']?([^\""\'>]*)/i' ,  $post->post_content, $matches);
+						$imageurl=$matches[1];
 						
-						preg_match("/([a-zA-Z0-9\-\_]+\.|)youtube\.com\/watch(\?v\=|\/v\/)([a-zA-Z0-9\-\_]{11})([^<\s]*)/", $post->post_content, $matches2); 
-					
-						$youtubeurl=$matches2[0];
-						if ($youtubeurl)
-							//$imageurl=$this->plugin_url.'/i/video.png';
-							$imageurl="http://i.ytimg.com/vi/{$matches2[3]}/0.jpg";	
+						if (!$imageurl)
+						{
 							
+							preg_match("/([a-zA-Z0-9\-\_]+\.|)youtube\.com\/watch(\?v\=|\/v\/)([a-zA-Z0-9\-\_]{11})([^<\s]*)/", $post->post_content, $matches2); 
 						
-
-
-							
+							$youtubeurl=$matches2[0];
+							if ($youtubeurl)
+								//$imageurl=$this->plugin_url.'/i/video.png';
+								$imageurl="http://i.ytimg.com/vi/{$matches2[3]}/0.jpg";	
+				
+						}
 					}
 					// get comments from WordPress database	
 					$comments = $wpdb->get_results("
@@ -549,7 +586,12 @@ height:850px;
 				}			
 			  $result.='<div style="margin-left:12px">created by <a href="http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives">Snazzy Archives</a></div>';
 					
-			
+			if ($cache)
+				// write cache			
+				@file_put_contents($this->cache_path."snazzy_cache.htm", $result);
+
+
+
 			return $result;
 			
 	}
