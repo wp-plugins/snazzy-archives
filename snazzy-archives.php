@@ -420,8 +420,8 @@ height:850px;
 
 				{
 			
-					$title = $post->post_title;
-					$excerpt= $this->GetExcerpt($post->post_content);
+					$title = htmlspecialchars($post->post_title);
+					$excerpt= htmlspecialchars($this->GetExcerpt($post->post_content));
 					$url=get_permalink($post->ID);
 					$date = strtotime($post->post_date);
 					
