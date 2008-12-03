@@ -30,6 +30,10 @@ Main features of Snazzy Archives are:
 
 Change log
 
+
+v1.0.1
+- Security enhancment
+
 v1.0
 - Added caching
 - Added option to load images

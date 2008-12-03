@@ -24,6 +24,9 @@
 		<div class="dbx-content">
 		 	<form name="SnazzyArchives" action="<?php echo $action_url ?>" method="post">
 					<input type="hidden" name="submitted" value="1" /> 
+					
+					<?php wp_nonce_field('snazzy-nonce'); ?>
+					
 					<h3>Usage</h3>		
 					<p>Create a new page for your snazzy archive, and insert the code [snazzy-archive] in the editor. Load this page and enjoy the view!</p>
 					<p>For more customization options please refer to <a href="http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives">Snazzy Archives Home page</a>. </p>

@@ -1,7 +1,9 @@
 jQuery(document).ready(function($) {
 
  	
-
+snazzy_mini=parseInt(SnazzySettings.snazzy_mini);
+snazzy_fx=parseInt(SnazzySettings.snazzy_fx);
+snazzy_corners=parseInt(SnazzySettings.snazzy_corners);
 
 
 if (snazzy_mini)
