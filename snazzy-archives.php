@@ -5,12 +5,11 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.0.1
+   Version: 1.2
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
-   Description: Express your site through unique representation of archive page.
-   
+   Description: Snazzy Archives is a visualization plugin for your WordPress site which creates completely unique archives pages.
    
    */
   /*
@@ -83,6 +82,8 @@
                   
                   if (isset($_GET['fx']))
                       $fx = $_GET['fx'];
+                      
+                      
                   
                   $corners = $options['corners'] ? 1 : 0;
                   
@@ -219,7 +220,7 @@
               $path = $this->plugin_url . '/i/';
               $width = 1000;
               $height = 750;
-              $bgcolor = 'F8F8EC';
+              $bgcolor = 'FFFFFF';
               $fgcolor = '444444';
               $speed = 100;
               // get the options
@@ -305,9 +306,8 @@
               
               if (isset($_GET['fx']))
                   $fx = $_GET['fx'];
-              
-              if ($fx > 1)
-                  $fx = 1;
+                  
+                                
               
               if ($layout < 1)
                   $layout = 1;
@@ -352,7 +352,7 @@
 .snazzy {
   position:absolute;
   width:100%;
-  height:600px;
+  height:560px;
   overflow:hidden;
 }
 .snazzy a {
@@ -433,7 +433,7 @@ height:850px;
                       // fx 2  only if comcount > 1
                       
                       if ($comcount >= 1) {
-                          if (0) {
+                          if ($imageurl) {
                               //($imageurl)
                               if ($count++ > 20)
                                   continue;

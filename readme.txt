@@ -3,7 +3,7 @@ Contributors: freediver
 Donate link: https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=510144434
 Tags:  archives,, jquery, post, 
 Requires at least: 2.3
-Tested up to: 2.6.3
+Tested up to: 2.7
 Stable tag: trunk
 
 Snazzy Archives is a visualization plugin for your WordPress site featuring an unique way to display all your posts. Your archive page will never be boring again!
@@ -30,6 +30,8 @@ Main features of Snazzy Archives are:
 
 Change log
 
+v1.2
+- Includes jQuery and Flash effects
 
 v1.0.1
 - Security enhancment

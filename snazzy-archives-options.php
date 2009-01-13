@@ -4,18 +4,15 @@
 	<div id="poststuff" style="margin-top:10px;">
 
 	 <div id="sideblock" style="float:right;width:220px;margin-left:10px;"> 
-		 <h3>Information</h3>
+		 <h2>Information</h2>
 		 <div id="dbx-content" style="text-decoration:none;">
 			 <img src="<?php echo $imgpath ?>/home.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives"> Snazzy Archives Home</a><br /><br />
-			 <img src="<?php echo $imgpath ?>/help.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/forum"> Plugin Forums</a><br /><br />
 			 <img src="<?php echo $imgpath ?>/rate.png"><a style="text-decoration:none;" href="http://wordpress.org/extend/plugins/snazzy-archives/"> Rate this plugin</a><br /><br />			 
-			 <img src="<?php echo $imgpath ?>/more.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/wordpress-plugins"> My WordPress Plugins</a><br /><br />
-			 <br />
-		
-			 <p align="center">
-			 <img src="<?php echo $imgpath ?>/p1.png"></p>
-			
-			 <p> <img src="<?php echo $imgpath ?>/idea.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/services"> Need a WordPress Expert?</a></p>
+			 <img src="<?php echo $imgpath ?>/help.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/forum"> Support and Help</a><br /><br />
+			 <p><img src="<?php echo $imgpath ?>/p1.png"></p>			 
+			 <img src="<?php echo $imgpath ?>/more.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/wordpress-plugins"> Cool WordPress Plugins</a><br /><br />
+			 <img src="<?php echo $imgpath ?>/twit.png"><a style="text-decoration:none;" href="http://twitter.com/vprelovac"> Plugin updates on Twitter</a><br /><br />			
+			 <img src="<?php echo $imgpath ?>/idea.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/services"> Need a WordPress Expert?</a>
  		</div>
  	</div>
 
@@ -27,12 +24,12 @@
 					
 					<?php wp_nonce_field('snazzy-nonce'); ?>
 					
-					<h3>Usage</h3>		
+					<h2>Usage</h2>		
 					<p>Create a new page for your snazzy archive, and insert the code [snazzy-archive] in the editor. Load this page and enjoy the view!</p>
 					<p>For more customization options please refer to <a href="http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives">Snazzy Archives Home page</a>. </p>
 					<br />
 					
-					<h3>Show</h3>
+					<h2>Show</h2>
 					<p>You can choose what pages you want to show in the archives.</p>
 					<input type="checkbox" name="posts"  <?php echo $posts ?>/><label for="posts"> Show Posts</label>  <br />
 					<input type="checkbox" name="pages"  <?php echo $pages ?>/><label for="pages"> Show Pages</label>  <br />
@@ -47,7 +44,7 @@
 					</p>
 					<br />
 					
-					<h3>Layout</h3>
+					<h2>Layout</h2>
 					<p>Snazzy Archives currently supports two layouts, and you can buid your own.</p>
 					<input type="text" name="layout" size="15" value="<?php echo $layout ?>"/><label for="layout"> Default layout (1 or 2)</label><br/>
 					<br /> 					
@@ -55,19 +52,17 @@
 					<br /s>
 					<p>Layout 1 uses less space and is more compact, while layout 2 shows more information.</p>
 					
-					<h3>Effects</h3>
+					<h2>Effects</h2>
 					<p>Special effects modify the way your archives look. You can either select one of them or use the archives without special effects (this is default, same as setting special fx to 0).</p>
 					<input type="text" name="fx" size="15" value="<?php echo $fx ?>"/><label for="width"> Special FX</label><br/>	
 					<p>Currently available effects:<br><ul>
-						<li>1. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=1">Carousel</a> - Shows the Snazzy Archive using JavaScript carousel (saving space).</li>
-						<?php if (0) : ?>
-						<li>2. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=2">jQuery space</a></li>
-						<li>3. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=3">Flash space</a></li>
-						<?php  endif; ?>
+						<li>1. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=1">Carousel</a> - Shows the Snazzy Archive using JavaScript carousel (saving space).</li>						
+						<li>2. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=2">jQuery space</a> - Uses jQuery to Animate the most popular posts</li>
+						<li>3. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=3">Flash space</a> - Uses Flash Animation</li>						
 					</ul></p>
 					<br /><br />
 					
-					<h3>Display</h3>			
+					<h2>Display</h2>			
 					<p>These are tweaks to the way Snazzy archives look.</p>
 					<input type="checkbox" name="mini"  <?php echo $mini ?> /><label for="mini"> Start in mini mode (collapsed archives)</label>  <br />
 					<br><img src="<?php echo $imgpath ?>/example3.jpg"> 
@@ -87,7 +82,7 @@
 					
 
 					
-					<h3>Year book</h3>	
+					<h2>Year book</h2>	
 					<p>You can specify unique text to print with any year, describing it.</p>
 					<img src="<?php echo $imgpath ?>/example4.jpg"> <p>Year book shows below the year and is useful for sharing your thoughts.</p>
 					<p>Use description in the form year#description, one per line, HTML allowed. For example: <br><br>
@@ -97,7 +92,7 @@
 					
 					<textarea name="years"  rows="10" cols="80"><?php echo $years ?></textarea>				<br/>	<br/>	
 					
-					<h3>Advanced</h3>	
+					<h2>Advanced</h2>	
 					<p>You may enter Snazzy Archives Page ID. If you do, Snazzy Archives will load JavaScript files only on this page.</p>
 					<input type="text" name="pageid" size="15" value="<?php echo $pageid ?>"/><label for="pageid"> Enter Snazzy Archives Page ID</label><br/>
 					<br/>	<br/>	
@@ -106,7 +101,7 @@
 			</form>
 		</div>
 		
-		<br/><br/><h3>&nbsp;</h3>	
+		<br/><br/><h2>&nbsp;</h2>	
 	 </div>
 
 	</div>
