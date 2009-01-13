@@ -9,7 +9,7 @@
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
-   Description: Snazzy Archives is a visualization plugin for your WordPress site which creates completely unique archives pages.
+   Description: Snazzy Archives is a visualization plugin for your WordPress site which creates completely unique archive pages.
    
    */
   /*
