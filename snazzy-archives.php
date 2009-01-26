@@ -5,13 +5,18 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.2
+   Version: 1.2.1
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
    Description: Snazzy Archives is a visualization plugin for your WordPress site which creates completely unique archive pages.
    
    */
+   
+   // todo The new module would include a boolean "show on archive page".
+   // show only tags tag=?
+   
+   
   /*
    Copyright 2008  Vladimir Prelovac  (email : vprelovac@gmail.com)
    
@@ -43,7 +48,7 @@
           // Initialize WordPress hooks
           function SnazzyArchives()
           {
-              $this->plugin_url = trailingslashit(get_bloginfo('wpurl')) . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__));
+              $this->plugin_url = $this->plugin_url = defined('WP_PLUGIN_URL') ? WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)) : trailingslashit(get_bloginfo('wpurl')) . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__)); 
               $this->cache_path = ABSPATH . 'wp-content/';
               
               // add shortcode handler
