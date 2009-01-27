@@ -15,6 +15,7 @@
    
    // todo The new module would include a boolean "show on archive page".
    // show only tags tag=?
+   // Also a small suggestion: could it display each year as a separate page, perhaps with tabs at the top. Currently it seems quite slow for large blogs. 
    
    
   /*
@@ -48,7 +49,7 @@
           // Initialize WordPress hooks
           function SnazzyArchives()
           {
-              $this->plugin_url = $this->plugin_url = defined('WP_PLUGIN_URL') ? WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)) : trailingslashit(get_bloginfo('wpurl')) . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__)); 
+              $this->plugin_url = defined('WP_PLUGIN_URL') ? WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)) : trailingslashit(get_bloginfo('wpurl')) . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__)); 
               $this->cache_path = ABSPATH . 'wp-content/';
               
               // add shortcode handler
