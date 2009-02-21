@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.2.1
+   Version: 1.2.2
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -388,8 +388,10 @@ height:850px;
               
               
               foreach ($posts as $post) {
-                  $title = htmlspecialchars($post->post_title);
-                  $excerpt = htmlspecialchars($this->GetExcerpt($post->post_content));
+                  //$title = htmlspecialchars($post->post_title);
+                  //$excerpt = htmlspecialchars($this->GetExcerpt($post->post_content));
+                  $title = ($post->post_title);
+                  $excerpt = ($this->GetExcerpt($post->post_content));
                   $url = get_permalink($post->ID);
                   $date = strtotime($post->post_date);
                   

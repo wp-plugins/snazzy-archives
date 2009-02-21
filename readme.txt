@@ -30,6 +30,9 @@ Main features of Snazzy Archives are:
 
 Change log
 
+v1.2.2 
+- removed htmlspecialchars for title and excerpt (problem with posts in other languages)
+
 v1.2
 - Includes jQuery and Flash effects
 
