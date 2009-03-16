@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.2.2
+   Version: 1.2.3
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -207,6 +207,7 @@
                   return $text;
               
               $text = strip_tags($text);
+              $text = preg_replace( '|\[(.+?)\](.+?\[/\\1\])?|s', '', $text );
               $words = explode(' ', $text, $length + 1);
               if (count($words) > $length) {
                   array_pop($words);
