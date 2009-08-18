@@ -70,12 +70,28 @@ color:#444;
 text-decoration:none;
 }
 
+.sz_img .sz_titleon {
+visibility: hidden;
+}
+
+.sz_img:hover .sz_titleon {
+-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+filter: alpha(opacity=50);
+opacity: 0.5;
+visibility: visible;
+}
 
 .sz_titleon {
 line-height:14px;
 color:#eee;
 background-color:#333;
+}
 
+.sz_img:hover .sz_titleon:hover {
+-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+color: #FFFFFF;
+filter: alpha(opacity=100);
+opacity: 1;
 }
 
 .sz_excerpt {

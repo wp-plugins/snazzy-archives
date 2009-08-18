@@ -3,7 +3,7 @@ Contributors: freediver
 Donate link: https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=510144434
 Tags:  archives,, jquery, post, 
 Requires at least: 2.3
-Tested up to: 2.7
+Tested up to: 2.8.4
 Stable tag: trunk
 
 Snazzy Archives is a visualization plugin for your WordPress site featuring an unique way to display all your posts. Your archive page will never be boring again!
@@ -28,35 +28,22 @@ Main features of Snazzy Archives are:
 * Caching available for faster access
 
 
-Change log
-
-v1.2.3
-- added code to remove '[]' shortcode text in excerpts (thainks Craig)
-
-v1.2.2 
-- removed htmlspecialchars for title and excerpt (problem with posts in other languages)
-
-v1.2
-- Includes jQuery and Flash effects
-
-v1.0.1
-- Security enhancment
-
-v1.0
-- Added caching
-- Added option to load images
-- Added option to specify page id, so the scripts load only that page
-
-v0.6 
-- Added option to show years in rows (on by default)
-- Added option to show months in reverse order (off by default). 
-Thanks to Jorge Sierra for suggesting these.
-
-v0.5.2 - Fixed issues with rogue posts appearign at the end of Archive
-v0.5.1 - No scripts added to admin panel anymore
-
-
 Plugin by Vladimir Prelovac. Need a <a href="http://www.prelovac.com/vladimir/services">WordPress Expert</a>?
+
+
+== Changelog ==
+
+= 1.3 =
+* added image resizing and caching, an excellent contribution by Amit Badkas
+
+= 1.2.3 =
+* added code to remove '[]' shortcode text in excerpts (thainks Craig)
+
+= 1.2.2 =
+* removed htmlspecialchars for title and excerpt (problem with posts in other languages)
+
+= 1.2 =
+* Includes jQuery and Flash effects
 
 == Installation ==
 

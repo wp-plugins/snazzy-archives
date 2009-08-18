@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.2.3
+   Version: 1.3
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -51,6 +51,7 @@
           {
               $this->plugin_url = defined('WP_PLUGIN_URL') ? WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)) : trailingslashit(get_bloginfo('wpurl')) . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__)); 
               $this->cache_path = ABSPATH . 'wp-content/';
+              $this->images_path = ABSPATH . 'wp-content' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'snazzy' . DIRECTORY_SEPARATOR;
               
               // add shortcode handler
               add_shortcode('snazzy-archive', array(&$this, 'display'));
@@ -122,6 +123,11 @@
           // Handle our options
           function get_options()
           {
+              // Create images directory if not exists already
+              if (!is_dir($this->images_path) && mkdir($this->images_path)) {
+                  chmod($this->images_path, 0777);
+              }
+
               $options = array('fx' => '0', 'years' => '2008#So far so good!', 'layout' => 1, 'mini' => '', 'corners' => '', 'posts' => 'on', 'pages' => '', 'fold' => 'on', 'reverse_months' => '', 'showimages' => 'on', 'cache' => '', 'pageid' => 0);
               
               $saved = get_option($this->SnazzyArchives_DB_option);
@@ -145,6 +151,21 @@
           
           function handle_options()
           {
+              // If admin wants to remove cached images
+              if (isset($_GET['remove_cached_images']) && (bool)$_GET['remove_cached_images']) {
+                  // Scan directory for cached images and remove them
+                  foreach (scandir($this->images_path) as $directoryContent) {
+                      if (is_file($this->images_path. $directoryContent)) {
+                          unlink($this->images_path . $directoryContent);
+                      }
+                  }
+
+                  // Remove references of 'remove cached images' flag from needed places and output success message
+                  $_SERVER['REQUEST_URI'] = str_replace('&remove_cached_images=1', '', $_SERVER['REQUEST_URI']);
+                  echo '<div class="updated fade"><p>Cached images have been removed successfully</p></div>';
+                  unset($_GET['remove_cached_images']);
+              }
+
               $options = $this->get_options();
               
               if (isset($_POST['submitted'])) {
@@ -413,7 +434,20 @@ height:850px;
                           $youtubeurl = $matches2[0];
                           if ($youtubeurl)
                               //$imageurl=$this->plugin_url.'/i/video.png';
-                              $imageurl = "http://i.ytimg.com/vi/{$matches2[3]}/0.jpg";
+                              $imageurl = "http://i.ytimg.com/vi/{$matches2[3]}/1.jpg";
+                      } else {
+                          // Initialize variable used to store image's name
+                          $backgroundImagename = $post->ID . '-' . md5($imageurl);
+
+                          // If image already downloaded then use it otherwise download it
+                          if (is_file($this->images_path . $backgroundImagename)) {
+                              $imageurl = $backgroundImagename;
+                          } else if (false !== file_put_contents($this->images_path . $backgroundImagename, file_get_contents($imageurl))) {
+                              chmod($this->images_path . $backgroundImagename, 0777);
+                              $imageurl = $backgroundImagename;
+                          } else {
+                              $imageurl = "";
+                          }
                       }
                   }
                   // get comments from WordPress database  
@@ -547,6 +581,55 @@ height:850px;
                   @file_put_contents($this->cache_path . "snazzy_cache.htm", $result);
               
               return $result;
+          }
+
+          function getImageUrl($backgroundImage, $backgroundImageDimension)
+          {
+              //
+              if ('http://' == substr($backgroundImage, 0, 7)) {
+                  return $backgroundImage;
+              }
+
+              // Background image path
+              $backgroundImage = $this->images_path . $backgroundImage;
+
+              // Get background image's information
+              $backgroundImageInformation = @getimagesize($backgroundImage);
+
+              //
+              if (!$backgroundImageInformation || $backgroundImageInformation[0] < $backgroundImageDimension || $backgroundImageInformation[1] < $backgroundImageDimension) {
+                  return false;
+              }
+
+              // Get background image's extension
+              $backgroundImageFileExtension = str_replace('image/', '', $backgroundImageInformation['mime']);
+
+              // If background image's extension is not 'gif' or 'png' then it must be 'jpg'
+              if (!in_array($backgroundImageFileExtension, array('gif', 'png', 'jpeg'))) {
+                  return false;
+              }
+              if ($backgroundImageFileExtension=='jpeg')
+              	$backgroundImageFileExtension = 'jpg';
+
+              // Get background image's basename
+              $backgroundImageBasename = basename($backgroundImage, '.' . $backgroundImageFileExtension);
+
+              // If re-sized background image exists then use it
+              if (is_file($this->images_path . $backgroundImageBasename . '-' . $backgroundImageDimension . '.' . $backgroundImageFileExtension)) {
+                  $backgroundImage = $this->images_path . $backgroundImageBasename . '-' . $backgroundImageDimension . '.' . $backgroundImageFileExtension;
+              } else {
+                  // Include needed library
+                  require_once ABSPATH . 'wp-admin' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'image.php';
+
+                  // Re-size background image
+                  $backgroundImage = image_resize($backgroundImage, $backgroundImageDimension, $backgroundImageDimension, true, $backgroundImageDimension);
+
+                  // Make background image world writeable
+                  chmod($backgroundImage, 0777);
+              }
+
+              // Return background image's URL
+              return str_replace(ABSPATH, get_option('siteurl') . '/', $backgroundImage);
           }
       }
   

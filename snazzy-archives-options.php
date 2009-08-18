@@ -77,7 +77,8 @@
 					<p>If enabled, archive months will be displayed in descending order (December through January).</p> <br />
 					
 					<input type="checkbox" name="showimages"  <?php echo $showimages ?> /><label for="showimages"> Show Images</label>  <br />
-					<p>Show post images. You can disable this to preserve bandwidth.</p><br/>					
+					<p>Show post images. You can disable this to preserve bandwidth.</p>
+                    <p><a href="<?php echo $action_url; ?>&amp;remove_cached_images=1" onclick="return confirm('Do you really want to remove cached images?');">Remove cached images</a></p><br/>
 					
 					<input type="checkbox" name="corners"  <?php echo $corners ?> /><label for="corners"> Round corners of images</label>  <br />
 					<p>This will apply dynamic rounding of image corners for better looking images.</p><br/>	
