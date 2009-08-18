@@ -45,6 +45,8 @@
 					<?php endif; ?>
 					</p>
 					<br />
+										
+					<input type="checkbox" name="thumb"  <?php echo $thumb ?>/><label for="thumb"> Use thumbnail cache</label>  <br />
 					
 					<h2>Layout</h2>
 					<p>Snazzy Archives currently supports two layouts, and you can buid your own.</p>

@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.3
+   Version: 1.3.1
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -128,7 +128,7 @@
                   chmod($this->images_path, 0777);
               }
 
-              $options = array('fx' => '0', 'years' => '2008#So far so good!', 'layout' => 1, 'mini' => '', 'corners' => '', 'posts' => 'on', 'pages' => '', 'fold' => 'on', 'reverse_months' => '', 'showimages' => 'on', 'cache' => '', 'pageid' => 0);
+              $options = array('fx' => '0', 'years' => '2008#So far so good!', 'layout' => 1, 'mini' => '', 'corners' => '', 'posts' => 'on', 'pages' => '', 'fold' => 'on', 'reverse_months' => '', 'showimages' => 'on', 'cache' => '', 'pageid' => 0, 'thumb' => '');
               
               $saved = get_option($this->SnazzyArchives_DB_option);
               
@@ -186,6 +186,7 @@
                   $options['fold'] = $_POST['fold'];
                   $options['reverse_months'] = $_POST['reverse_months'];
                   $options['cache'] = $_POST['cache'];
+                  $options['thumb'] = $_POST['thumb'];
                   $options['pageid'] = (int)$_POST['pageid'];
                   
                   update_option($this->SnazzyArchives_DB_option, $options);
@@ -213,6 +214,7 @@
               $fold = $options['fold'] == 'on' ? 'checked' : '';
               $reverse_months = $options['reverse_months'] == 'on' ? 'checked' : '';
               $cache = $options['cache'] == 'on' ? 'checked' : '';
+              $thumb = $options['thumb'] == 'on' ? 'checked' : '';
               
               $writeable = is_writeable($this->cache_path);
               
@@ -237,8 +239,14 @@
               }
               return $text;
           }
-          
-          
+            
+		      function ends_with($string, $ending)
+		      {
+		   	   $len = strlen($ending);
+		   	   $string_end = substr($string, strlen($string) - $len);
+		   	   return $string_end == $ending;
+		      }
+		          
           
           // piece together the flash code
           function createflashcode($tagcloud)
@@ -435,7 +443,7 @@ height:850px;
                           if ($youtubeurl)
                               //$imageurl=$this->plugin_url.'/i/video.png';
                               $imageurl = "http://i.ytimg.com/vi/{$matches2[3]}/1.jpg";
-                      } else {
+                      } else if ($options['thumb'] && !$this->ends_with($imageurl,'.bmp')) {
                           // Initialize variable used to store image's name
                           $backgroundImagename = $post->ID . '-' . md5($imageurl);
 
@@ -585,6 +593,11 @@ height:850px;
 
           function getImageUrl($backgroundImage, $backgroundImageDimension)
           {
+              $options = $this->get_options();
+              $obi=$backgroundImage;
+              
+							if (!$options['thumb'])
+								return $backgroundImage;
               //
               if ('http://' == substr($backgroundImage, 0, 7)) {
                   return $backgroundImage;
@@ -598,15 +611,16 @@ height:850px;
 
               //
               if (!$backgroundImageInformation || $backgroundImageInformation[0] < $backgroundImageDimension || $backgroundImageInformation[1] < $backgroundImageDimension) {
-                  return false;
+                  return $obi;
               }
 
               // Get background image's extension
               $backgroundImageFileExtension = str_replace('image/', '', $backgroundImageInformation['mime']);
+             
 
               // If background image's extension is not 'gif' or 'png' then it must be 'jpg'
-              if (!in_array($backgroundImageFileExtension, array('gif', 'png', 'jpeg'))) {
-                  return false;
+              if (!in_array($backgroundImageFileExtension, array('gif', 'png', 'jpeg'))) {                 	         	
+                  return $obi;
               }
               if ($backgroundImageFileExtension=='jpeg')
               	$backgroundImageFileExtension = 'jpg';
