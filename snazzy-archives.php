@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.3.1
+   Version: 1.3.2
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -124,7 +124,7 @@
           function get_options()
           {
               // Create images directory if not exists already
-              if (!is_dir($this->images_path) && mkdir($this->images_path)) {
+              if (!is_dir($this->images_path) && function_exists('mkdir') && mkdir($this->images_path)) {
                   chmod($this->images_path, 0777);
               }
 

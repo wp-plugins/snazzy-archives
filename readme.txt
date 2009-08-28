@@ -33,6 +33,9 @@ Plugin by Vladimir Prelovac. Need a <a href="http://www.prelovac.com/vladimir/se
 
 == Changelog ==
 
+= 1.3.2 =
+* fixes the mkdir issue
+
 = 1.3 =
 * added image resizing and caching, an excellent contribution by Amit Badkas
 
