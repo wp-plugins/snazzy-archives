@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.3.2
+   Version: 1.4
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -117,7 +117,13 @@
           }
           function delete_cache()
           {
-              @unlink($this->cache_path . "snazzy_cache.htm");
+              if(!$dh = @opendir($this->cache_path))
+                  return;
+              while (false !== ($obj = readdir($dh))) 
+              {
+                  if ((strstr($obj, "snazzy_cache.htm") !== false) || (strstr($obj, "snazzy_cache-") !== false))
+                      @unlink($obj);
+              }
           }
           
           // Handle our options
@@ -281,9 +287,13 @@
               return $flashtag;
           }
           
-          function display()
+          function display($atts)
           {
               global $wpdb;
+              extract( shortcode_atts( array(
+                  'filteryear' => '0',
+              ), $atts ) );
+              $filteryear = floor($filteryear);
               
               $options = $this->get_options();
               
@@ -299,7 +309,7 @@
               
               if ($cache) {
                   // cache part
-                  $data = @file_get_contents($this->cache_path . "snazzy_cache.htm");
+                  $data = @file_get_contents($this->cache_path . "snazzy_cache-" . $filteryear . ".htm");
                   
                   // return the cache data if it exists
                   if ($data)
@@ -316,7 +326,10 @@
                       $oby = 'YEAR(post_date) DESC, post_date ';
                   else
                       $oby = 'post_date DESC ';
-                  $query = "SELECT * FROM $wpdb->posts WHERE post_status = 'publish' AND post_password = '' AND post_type IN ($types) ORDER BY " . $oby;
+                  $query = "SELECT * FROM $wpdb->posts WHERE post_status = 'publish' AND post_password = '' AND post_type IN ($types) ";
+                  if ($filteryear != 0)
+                      $query .= " AND post_date >= '" . $filteryear . "-01-01 00:00:00' AND post_date <= '" . $filteryear . "-12-31 23:59:59' ";
+                  $query .= "ORDER BY " . $oby;
                   
                   
                   
@@ -428,6 +441,8 @@ height:850px;
                   $day = date('d', $date);
                   $month = date('M', $date);
                   $year = date('Y', $date);
+                  if (($filteryear != 0) && ($year != $filteryear))
+                      continue;
                   
                   
                   $imageurl = "";
@@ -448,6 +463,7 @@ height:850px;
                           $backgroundImagename = $post->ID . '-' . md5($imageurl);
 
                           // If image already downloaded then use it otherwise download it
+                          $oldError = error_reporting(0); //suppress errors for 404s in offsite images (users shouldn't be hotlinking images, but still....)
                           if (is_file($this->images_path . $backgroundImagename)) {
                               $imageurl = $backgroundImagename;
                           } else if (false !== file_put_contents($this->images_path . $backgroundImagename, file_get_contents($imageurl))) {
@@ -456,6 +472,7 @@ height:850px;
                           } else {
                               $imageurl = "";
                           }
+                          error_reporting($oldError);
                       }
                   }
                   // get comments from WordPress database  
@@ -586,7 +603,7 @@ height:850px;
               
               if ($cache)
                   // write cache      
-                  @file_put_contents($this->cache_path . "snazzy_cache.htm", $result);
+                  @file_put_contents($this->cache_path . "snazzy_cache-" . $filteryear . ".htm", $result);
               
               return $result;
           }
