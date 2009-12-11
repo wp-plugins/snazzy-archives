@@ -9,7 +9,7 @@ Template Name: Snazzy Archives
 
 
 	<p align="center">
-		<?php if (isset($SnazzyArchives)) echo $SnazzyArchives->display(); ?>
+		<?php if (isset($SnazzyArchives)) echo $SnazzyArchives->display(""); ?>
 	</p>
 
 <?php get_footer(); ?>

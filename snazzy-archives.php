@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.4
+   Version: 1.4.1
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
