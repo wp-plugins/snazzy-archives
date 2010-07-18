@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.4.1
+   Version: 1.5
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -129,11 +129,7 @@
           // Handle our options
           function get_options()
           {
-              // Create images directory if not exists already
-              if (!is_dir($this->images_path) && function_exists('mkdir') && mkdir($this->images_path)) {
-                  chmod($this->images_path, 0777);
-              }
-
+              
               $options = array('fx' => '0', 'years' => '2008#So far so good!', 'layout' => 1, 'mini' => '', 'corners' => '', 'posts' => 'on', 'pages' => '', 'fold' => 'on', 'reverse_months' => '', 'showimages' => 'on', 'cache' => '', 'pageid' => 0, 'thumb' => '');
               
               $saved = get_option($this->SnazzyArchives_DB_option);
@@ -145,6 +141,13 @@
               
               if ($saved != $options)
                   update_option($this->SnazzyArchives_DB_option, $options);
+              
+              
+              // Create images directory if not exists already
+              if ($options['thumb'] && !is_dir($this->images_path) && function_exists('mkdir') && mkdir($this->images_path)) {
+                  chmod($this->images_path, 0777);
+              }
+
               
               return $options;
           }

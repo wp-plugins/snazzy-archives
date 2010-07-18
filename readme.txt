@@ -1,9 +1,9 @@
 === Snazzy Archives ===
 Contributors: freediver
 Donate link: https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=510144434
-Tags:  archives,, jquery, post, 
+Tags:  archives, jquery, post, 
 Requires at least: 2.3
-Tested up to: 2.8.4
+Tested up to: 3.0
 Stable tag: trunk
 
 Snazzy Archives is a visualization plugin for your WordPress site featuring an unique way to display all your posts. Your archive page will never be boring again!
@@ -32,6 +32,10 @@ Plugin by Vladimir Prelovac. Need a <a href="http://www.prelovac.com/vladimir/se
 
 
 == Changelog ==
+
+= 1.5 = 
+* Made mkdir() bug that sometimed appeared more transparent
+* Updated for WP 3.0
 
 = 1.4 =
 * display archives by year using [snazzy-archive filteryear="2008"] shortcode. Thanks to [Brian Enigma](http://netninja.com/archives/)
