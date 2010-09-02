@@ -33,7 +33,7 @@ Plugin by Vladimir Prelovac. Need a <a href="http://www.prelovac.com/vladimir/se
 
 == Changelog ==
 
-= 1.5.1= 
+= 1.5.2 = 
 * Display localized abbrev of the month name (credits Yassen Yotov)
 
 = 1.5 = 

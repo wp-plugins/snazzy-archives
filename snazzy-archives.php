@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.5.1
+   Version: 1.5.2
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -444,7 +444,8 @@ height:850px;
                   $day = date('d', $date);
                   $month = date('M', $date);
                   $year = date('Y', $date);
-                  
+
+                  global $wp_locale;
                   $datemonth = $wp_locale->get_month( date( 'm', $date ) );
                   $datemonth_abbrev = $wp_locale->get_month_abbrev( $datemonth );
                   $month = $datemonth_abbrev;
