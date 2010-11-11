@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.5.2
+   Version: 1.6
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -130,7 +130,7 @@
           function get_options()
           {
               
-              $options = array('fx' => '0', 'years' => '2008#So far so good!', 'layout' => 1, 'mini' => '', 'corners' => '', 'posts' => 'on', 'pages' => '', 'fold' => 'on', 'reverse_months' => '', 'showimages' => 'on', 'cache' => '', 'pageid' => 0, 'thumb' => '');
+              $options = array('fx' => '0', 'years' => '2008#So far so good!', 'layout' => 1, 'mini' => '', 'corners' => '', 'posts' => 'on', 'pages' => '', 'fold' => 'on', 'reverse_months' => '', 'showimages' => 'on', 'cache' => '', 'pageid' => 0, 'thumb' => '', 'exclude_cat' => '');
               
               $saved = get_option($this->SnazzyArchives_DB_option);
               
@@ -197,6 +197,7 @@
                   $options['cache'] = $_POST['cache'];
                   $options['thumb'] = $_POST['thumb'];
                   $options['pageid'] = (int)$_POST['pageid'];
+		$options['exclude_cat'] = $_POST['exclude_cat'];
                   
                   update_option($this->SnazzyArchives_DB_option, $options);
                   
@@ -224,6 +225,7 @@
               $reverse_months = $options['reverse_months'] == 'on' ? 'checked' : '';
               $cache = $options['cache'] == 'on' ? 'checked' : '';
               $thumb = $options['thumb'] == 'on' ? 'checked' : '';
+	      $exclude_cat = $options['exclude_cat'];
               
               $writeable = is_writeable($this->cache_path);
               
@@ -256,7 +258,23 @@
 		   	   return $string_end == $ending;
 		      }
 		          
-          
+          function Credit() { 
+   	
+	    $options = $this->get_options();
+	    
+	    $links=array( array("WordPress Consulting","http://www.prelovac.com/vladimir/services/"), array("WordPress Consultant","http://www.prelovac.com/vladimir/services/"),array("WordPress Services","http://www.prelovac.com/vladimir/services/"),array("WordPress Expert","http://www.prelovac.com/vladimir/services/"),array("SEO WordPress","http://www.prelovac.com/vladimir/services/"),array("WordPress SEO","http://www.prelovac.com/vladimir/services/"),array("WordPress Developer","http://www.prelovac.com/vladimir/wordpress-professional-developer"),array("WordPress Professional","http://www.prelovac.com/vladimir/wordpress-professional-developer"),array("WordPress Plugins","http://www.prelovac.com/vladimir/wordpress-plugins"));
+
+	    
+	    if (!($num=$options['credits_link']))   
+	    {
+		    $num=rand(0, count($links)-1);
+		    $options['credits_link']=$num;
+		    update_option($this->SnazzyArchives_DB_option, $options);
+	    }
+	    
+	    return '<div style="margin-left:12px; font-size:9px">Snazzy Archives by <a style="text-decoration:none" href="'.$links[$num][1].'">'.$links[$num][0].'</a></div>';
+
+	}
           // piece together the flash code
           function createflashcode($tagcloud)
           {
@@ -319,7 +337,20 @@
                       return $data;
               }
               
-              
+	      $excat=$options['exclude_cat'];
+              if ($excat)
+	      {
+		 
+		$where="
+			LEFT JOIN $wpdb->term_relationships ON ({$wpdb->posts}.ID = $wpdb->term_relationships.object_id)
+			LEFT JOIN $wpdb->term_taxonomy ON ($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id)
+			WHERE ($wpdb->term_taxonomy.taxonomy = 'category' AND $wpdb->term_taxonomy.term_id NOT IN($excat)) AND ";
+
+	      }
+	      else 
+		  $where=" WHERE ";
+
+
               if (is_category() || is_tag() || is_day() || is_month() || is_year()) {
                   global $posts;
               } else {
@@ -329,13 +360,12 @@
                       $oby = 'YEAR(post_date) DESC, post_date ';
                   else
                       $oby = 'post_date DESC ';
-                  $query = "SELECT * FROM $wpdb->posts WHERE post_status = 'publish' AND post_password = '' AND post_type IN ($types) ";
+                  $query = "SELECT DISTINCT ID, post_title, post_content, post_date FROM $wpdb->posts $where post_status = 'publish' AND post_password = '' AND post_type IN ($types) ";
                   if ($filteryear != 0)
                       $query .= " AND post_date >= '" . $filteryear . "-01-01 00:00:00' AND post_date <= '" . $filteryear . "-12-31 23:59:59' ";
                   $query .= "ORDER BY " . $oby;
                   
-                  
-                  
+                 
                   
                   $posts = $wpdb->get_results($query);
               }
@@ -613,7 +643,7 @@ height:850px;
                   
                   $result .= "</tr></tbody></table></div>";
               }
-              $result .= '<div style="margin-left:12px">created by <a href="http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives">Snazzy Archives</a></div>';
+              $result .= $this->Credit();
               
               if ($cache)
                   // write cache      

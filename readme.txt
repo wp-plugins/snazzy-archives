@@ -1,7 +1,7 @@
 === Snazzy Archives ===
 Contributors: freediver
 Donate link: https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=510144434
-Tags:  archives, jquery, post, 
+Tags:  archives, jquery, post, archive, image, jquery, post list, thumbnail, snazzy
 Requires at least: 2.3
 Tested up to: 3.0.1
 Stable tag: trunk
@@ -32,6 +32,9 @@ Plugin by Vladimir Prelovac. Need a <a href="http://www.prelovac.com/vladimir/se
 
 
 == Changelog ==
+
+= 1.6
+* New option to exclude categories from archives
 
 = 1.5.2 = 
 * Display localized abbrev of the month name (credits Yassen Yotov)

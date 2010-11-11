@@ -1,21 +1,10 @@
-<div class="wrap" style="max-width:950px !important;">
+<div class="wrap">
 	<h2>Snazzy Archives</h2>
 				
 	<div id="poststuff" style="margin-top:10px;">
 
-	 <div id="sideblock" style="float:right;width:220px;margin-left:10px;"> 
-		 <h2>Information</h2>
-		 <div id="dbx-content" style="text-decoration:none;">
-			 <img src="<?php echo $imgpath ?>/home.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives"> Snazzy Archives Home</a><br /><br />
-			 <img src="<?php echo $imgpath ?>/rate.png"><a style="text-decoration:none;" href="http://wordpress.org/extend/plugins/snazzy-archives/"> Rate this plugin</a><br /><br />			 
-			 <img src="<?php echo $imgpath ?>/help.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/forum"> Support and Help</a><br />			 
-			 <p>
-			 <a style="text-decoration:none;" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2567254"><img src="<?php echo $imgpath ?>/paypal.gif"></a>			 
-			 </p><br />		 
-			 <img src="<?php echo $imgpath ?>/more.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/wordpress-plugins"> Cool WordPress Plugins</a><br /><br />
-			 <img src="<?php echo $imgpath ?>/twit.png"><a style="text-decoration:none;" href="http://twitter.com/vprelovac"> Follow updates on Twitter</a><br /><br />			
-			 <img src="<?php echo $imgpath ?>/idea.png"><a style="text-decoration:none;" href="http://www.prelovac.com/vladimir/services"> Need a WordPress Expert?</a>
- 		</div>
+	 <div id="sideblock" style="float:right;width:270px;margin-left:10px;"> 
+		 <iframe width=270 height=800 frameborder="0" src="http://www.prelovac.com/plugin/news.php?id=4&utm_source=plugin&utm_medium=plugin&utm_campaign=Snazzy%2BArchives"></iframe>
  	</div>
 
 	 <div id="mainblock" style="width:710px">
@@ -36,6 +25,8 @@
 					<input type="checkbox" name="posts"  <?php echo $posts ?>/><label for="posts"> Show Posts</label>  <br />
 					<input type="checkbox" name="pages"  <?php echo $pages ?>/><label for="pages"> Show Pages</label>  <br />
 					<br />
+					<p>You can exclude categories from showing. Enter category IDs, seperated by comma.
+					<input type="text" name="exclude_cat" size="25" value="<?php echo $exclude_cat ?>"/><label for="exclude_cat"> Exclude categories</label><br/>
 					<p>
 					<?php if ($writeable) : ?>
 					Your wp-content folder is writeable by WordPress. You may use the cache.<br /><br />
@@ -111,5 +102,5 @@
 
 	</div>
 	
-<h5>WordPress plugin by <a href="http://www.prelovac.com/vladimir/">Vladimir Prelovac</a></h5>
+<h5>Another fine WordPress plugin by <a href="http://www.prelovac.com/vladimir/">Vladimir Prelovac</a></h5>
 </div>
