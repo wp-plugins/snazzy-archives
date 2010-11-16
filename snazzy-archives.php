@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.6
+   Version: 1.6.1
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -363,6 +363,7 @@
                   $query = "SELECT DISTINCT ID, post_title, post_content, post_date FROM $wpdb->posts $where post_status = 'publish' AND post_password = '' AND post_type IN ($types) ";
                   if ($filteryear != 0)
                       $query .= " AND post_date >= '" . $filteryear . "-01-01 00:00:00' AND post_date <= '" . $filteryear . "-12-31 23:59:59' ";
+		  else $query .= " AND post_date <= NOW()";
                   $query .= "ORDER BY " . $oby;
                   
                  

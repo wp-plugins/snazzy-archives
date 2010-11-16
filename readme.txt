@@ -33,6 +33,9 @@ Plugin by Vladimir Prelovac. Need a <a href="http://www.prelovac.com/vladimir/se
 
 == Changelog ==
 
+= 1.6.1 =
+* Fixed a bug where it would display display posts with date set in future 
+
 = 1.6
 * New option to exclude categories from archives
 
