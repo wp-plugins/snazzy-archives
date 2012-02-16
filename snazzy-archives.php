@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.6.1
+   Version: 1.6.2
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -262,7 +262,11 @@
    	
 	    $options = $this->get_options();
 	    
-	    $links=array( array("WordPress Consulting","http://www.prelovac.com/vladimir/services/"), array("WordPress Consultant","http://www.prelovac.com/vladimir/services/"),array("WordPress Services","http://www.prelovac.com/vladimir/services/"),array("WordPress Expert","http://www.prelovac.com/vladimir/services/"),array("SEO WordPress","http://www.prelovac.com/vladimir/services/"),array("WordPress SEO","http://www.prelovac.com/vladimir/services/"),array("WordPress Developer","http://www.prelovac.com/vladimir/wordpress-professional-developer"),array("WordPress Professional","http://www.prelovac.com/vladimir/wordpress-professional-developer"),array("WordPress Plugins","http://www.prelovac.com/vladimir/wordpress-plugins"));
+	    $links=array( array("WordPress Consulting","http://www.prelovac.com/vladimir/services/"), array("WordPress Consultant","http://www.prelovac.com/vladimir/services/"),array("WordPress Services","http://www.prelovac.com/vladimir/services/"),array("WordPress Expert","http://www.prelovac.com/vladimir/services/"),array("SEO WordPress","http://www.prelovac.com/vladimir/services/"),array("WordPress SEO","http://www.prelovac.com/vladimir/services/"),array("WordPress Developer","http://www.prelovac.com/vladimir/wordpress-professional-developer"),array("WordPress Professional","http://www.prelovac.com/vladimir/wordpress-professional-developer"),
+	    array("WordPress Plugins","http://www.prelovac.com/vladimir/wordpress-plugins"),
+	    array("WordPress SEO Consultant","http://www.prelovac.com/vladimir/services"),
+	    array("WordPress SEO Services","http://www.prelovac.com/vladimir/services")
+	    );
 
 	    
 	    if (!($num=$options['credits_link']))   
@@ -644,7 +648,7 @@ height:850px;
                   
                   $result .= "</tr></tbody></table></div>";
               }
-              $result .= $this->Credit();
+              //$result .= $this->Credit();
               
               if ($cache)
                   // write cache      
