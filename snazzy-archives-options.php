@@ -3,8 +3,8 @@
 				
 	<div id="poststuff" style="margin-top:10px;">
 
-	 <div id="sideblock" style="float:right;width:270px;margin-left:10px;"> 
-		 <iframe width=270 height=800 frameborder="0" src="http://www.prelovac.com/plugin/news.php?id=4&utm_source=plugin&utm_medium=plugin&utm_campaign=Snazzy%2BArchives"></iframe>
+	 <div id="sideblock" style="float:right;width:270px;margin-left:10px;"> 
+		 <iframe width=270 height=800 frameborder="0" src="http://www.prelovac.com/plugin/news.php?id=4&utm_source=plugin&utm_medium=plugin&utm_campaign=Snazzy%2BArchives"></iframe>
  	</div>
 
 	 <div id="mainblock" style="width:710px">
@@ -51,9 +51,8 @@
 					<p>Special effects modify the way your archives look. You can either select one of them or use the archives without special effects (this is default, same as setting special fx to 0).</p>
 					<input type="text" name="fx" size="15" value="<?php echo $fx ?>"/><label for="width"> Special FX</label><br/>	
 					<p>Currently available effects:<br><ul>
-						<li>1. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=1">Carousel</a> - Shows the Snazzy Archive using JavaScript carousel (saving space).</li>						
-						<li>2. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=2">jQuery space</a> - Uses jQuery to Animate the most popular posts</li>
-						<li>3. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=3">Flash space</a> - Uses Flash Animation</li>						
+						<li>1. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=1">Carousel</a> - Shows the Snazzy Archive using JavaScript carousel (saving space).</li>											
+						<li>2. <a href="http://www.prelovac.com/vladimir/archive-spec?fx=3">Flash space</a> - Uses Flash Animation</li>						
 					</ul></p>
 					<br /><br />
 					

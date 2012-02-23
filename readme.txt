@@ -33,6 +33,9 @@ Plugin by Vladimir Prelovac. Need a <a href="http://www.prelovac.com/vladimir/se
 
 == Changelog ==
 
+= 1.6.3 =
+* Removed Rotator effect
+
 = 1.6.2 =
 * Removed the credit link
 
