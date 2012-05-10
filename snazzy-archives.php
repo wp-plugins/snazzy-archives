@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.6.3
+   Version: 1.7.0
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -257,28 +257,7 @@
 		   	   $string_end = substr($string, strlen($string) - $len);
 		   	   return $string_end == $ending;
 		      }
-		          
-          function Credit() { 
-   	
-	    $options = $this->get_options();
-	    
-	    $links=array( array("WordPress Consulting","http://www.prelovac.com/vladimir/services/"), array("WordPress Consultant","http://www.prelovac.com/vladimir/services/"),array("WordPress Services","http://www.prelovac.com/vladimir/services/"),array("WordPress Expert","http://www.prelovac.com/vladimir/services/"),array("SEO WordPress","http://www.prelovac.com/vladimir/services/"),array("WordPress SEO","http://www.prelovac.com/vladimir/services/"),array("WordPress Developer","http://www.prelovac.com/vladimir/wordpress-professional-developer"),array("WordPress Professional","http://www.prelovac.com/vladimir/wordpress-professional-developer"),
-	    array("WordPress Plugins","http://www.prelovac.com/vladimir/wordpress-plugins"),
-	    array("WordPress SEO Consultant","http://www.prelovac.com/vladimir/services"),
-	    array("WordPress SEO Services","http://www.prelovac.com/vladimir/services")
-	    );
-
-	    
-	    if (!($num=$options['credits_link']))   
-	    {
-		    $num=rand(0, count($links)-1);
-		    $options['credits_link']=$num;
-		    update_option($this->SnazzyArchives_DB_option, $options);
-	    }
-	    
-	    return '<div style="margin-left:12px; font-size:9px">Snazzy Archives by <a style="text-decoration:none" href="'.$links[$num][1].'">'.$links[$num][0].'</a></div>';
-
-	}
+		                    
           // piece together the flash code
           function createflashcode($tagcloud)
           {
@@ -497,8 +476,19 @@ height:850px;
                   $imageurl = "";
                   
                   if ($showimages) {
-                      preg_match('/<\s*img [^\>]*src\s*=\s*[\""\']?([^\""\'>]*)/i', $post->post_content, $matches);
-                      $imageurl = $matches[1];
+                  	
+                  		$matches = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+											if (isset($matches[0]))
+												$imageurl = $matches[0]; 
+											else
+												$imageurl='';
+											
+											
+											if (!$imageurl)
+											{
+                      	preg_match('/<\s*img [^\>]*src\s*=\s*[\""\']?([^\""\'>]*)/i', $post->post_content, $matches);
+                      	$imageurl = $matches[1];
+                      
                       
                       if (!$imageurl) {
                           preg_match("/([a-zA-Z0-9\-\_]+\.|)youtube\.com\/watch(\?v\=|\/v\/)([a-zA-Z0-9\-\_]{11})([^<\s]*)/", $post->post_content, $matches2);
@@ -648,7 +638,7 @@ height:850px;
                   
                   $result .= "</tr></tbody></table></div>";
               }
-              //$result .= $this->Credit();
+              
               
               if ($cache)
                   // write cache      
