@@ -33,7 +33,7 @@ Plugin by Vladimir Prelovac. Need a <a href="http://www.prelovac.com/vladimir/se
 
 == Changelog ==
 
-= 1.7.0 =
+= 1.7.1 =
 * Support for Featured images
 
 = 1.6.3 =
