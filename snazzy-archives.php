@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.7.1
+   Version: 1.7.2
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -197,7 +197,7 @@
                   $options['cache'] = $_POST['cache'];
                   $options['thumb'] = $_POST['thumb'];
                   $options['pageid'] = (int)$_POST['pageid'];
-		$options['exclude_cat'] = $_POST['exclude_cat'];
+		$options['exclude_cat'] = htmlentities(stripslashes(strip_tags($_POST['exclude_cat'])));
                   
                   update_option($this->SnazzyArchives_DB_option, $options);
                   
@@ -366,12 +366,12 @@
                   $fx = 0;
               
               if (isset($_GET['layout']))
-                  $layout = $_GET['layout'];
+                  $layout = (int) $_GET['layout'];
               
               
               
               if (isset($_GET['fx']))
-                  $fx = $_GET['fx'];
+                  $fx = (int) $_GET['fx'];
                   
                                 
               
