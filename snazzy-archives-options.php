@@ -4,7 +4,9 @@
 	<div id="poststuff" style="margin-top:10px;">
 
 	 <div id="sideblock" style="float:right;width:270px;margin-left:10px;"> 
-		 <iframe width=270 height=800 frameborder="0" src="http://www.prelovac.com/plugin/news.php?id=4&utm_source=plugin&utm_medium=plugin&utm_campaign=Snazzy%2BArchives"></iframe>
+		 <div class="ad">
+					<a href="https://managewp.com/?utm_source=Plugins&amp;utm_medium=Banner&amp;utm_content=mwp250_2&amp;utm_campaign=SnazzyArchives" title="ManageWP.com - Manage your sites from one dashboard"><img src="<?php echo $imgpath ?>/mwp250_2.png" alt="ManageWP.com - Manage Multiple WordPress Sites"></a>
+					</div>
  	</div>
 
 	 <div id="mainblock" style="width:710px">

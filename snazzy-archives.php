@@ -5,7 +5,7 @@
   
   /*
    Plugin Name: Snazzy Archives
-   Version: 1.7.2
+   Version: 1.7.3
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/snazzy-archives
    Author: Vladimir Prelovac
    Author URI: http://www.prelovac.com/vladimir
@@ -49,7 +49,7 @@
           // Initialize WordPress hooks
           function SnazzyArchives()
           {
-              $this->plugin_url = defined('WP_PLUGIN_URL') ? WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)) : trailingslashit(get_bloginfo('wpurl')) . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__)); 
+              $this->plugin_url = trailingslashit(plugins_url(null, __FILE__)); 
               $this->cache_path = ABSPATH . 'wp-content/';
               $this->images_path = ABSPATH . 'wp-content' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'snazzy' . DIRECTORY_SEPARATOR;
               
